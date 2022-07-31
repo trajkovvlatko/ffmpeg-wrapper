@@ -1,0 +1,65 @@
+name:                ffmpeg-wrapper-web
+version:             0.1.0.0
+github:              "trajkovvlatko/ffmpeg-wrapper-web"
+license:             BSD3
+author:              "Vlatko Trajkov"
+maintainer:          "trajkovvlatko@gmail.com"
+copyright:           "2022 Vlatko Trajkov"
+
+extra-source-files:
+- README.md
+- ChangeLog.md
+
+# Metadata used when publishing your package
+# synopsis:            Short description of your package
+# category:            Web
+
+# To avoid duplicated efforts in documentation and dealing with the
+# complications of embedding Haddock markup inside cabal files, it is
+# common to point users to the README.md file.
+description:         Please see the README on GitHub at <https://github.com/trajkovvlatko/ffmpeg-wrapper-web#readme>
+
+dependencies:
+- base >= 4.7 && < 5
+- aeson
+- servant
+- servant-client
+- servant-server
+- warp
+- wai
+- wai-cors
+
+library:
+  source-dirs: src
+
+executables:
+  ffmpeg-wrapper-web-exe:
+    main:                Main.hs
+    source-dirs:         app
+    ghc-options:
+    - -threaded
+    - -rtsopts
+    - -with-rtsopts=-N
+    dependencies:
+    - ffmpeg-wrapper-web
+
+tests:
+  ffmpeg-wrapper-web-test:
+    main:                Spec.hs
+    source-dirs:         test
+    ghc-options:
+    - -threaded
+    - -rtsopts
+    - -with-rtsopts=-N
+    dependencies:
+    - ffmpeg-wrapper-web
+
+default-extensions:
+- OverloadedStrings
+- ScopedTypeVariables
+- DeriveGeneric
+- LambdaCase
+- QuasiQuotes
+- TemplateHaskell
+- DataKinds
+- TypeOperators
