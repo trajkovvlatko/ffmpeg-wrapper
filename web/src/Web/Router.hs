@@ -1,12 +1,13 @@
 module Web.Router (progress, transcode) where
 
 import Servant.Server (Handler)
-import Web.Requests.Transcode (TranscodeRequest)
-import Web.Requests.User (User (User, name))
+import Web.Endpoints.Progress.JSON (ProgressResponse (ProgressResponse))
+import Web.Endpoints.Transcode.JSON (TranscodeRequest, TranscodeResponse (TranscodeResponse))
 
-progress :: Handler User
-progress = return (User 12 "nut")
+progress :: Int -> Handler ProgressResponse
+progress jobId = do
+  return $ ProgressResponse jobId 1
 
-transcode :: TranscodeRequest -> Handler TranscodeRequest
+transcode :: TranscodeRequest -> Handler TranscodeResponse
 transcode input = do
-  return input
+  return $ TranscodeResponse 1

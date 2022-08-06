@@ -1,8 +1,15 @@
-module Web.Requests.Transcode (TranscodeRequest, parseTranscodeRequest) where
+module Web.Endpoints.Transcode.JSON
+  ( TranscodeRequest,
+    TranscodeResponse (TranscodeResponse),
+    parseTranscodeRequest,
+  )
+where
 
 import Data.Aeson (FromJSON (parseJSON), Object, ToJSON (toJSON), object, withObject, (.:), (.:?), (.=))
 import Data.Aeson.Types (Parser)
 import GHC.Generics (Generic)
+
+-- Request
 
 data TranscodeRequest = TranscodeRequest
   { source :: String,
@@ -35,31 +42,6 @@ instance FromJSON Config where
 instance FromJSON Output where
   parseJSON = withObject "Output" parseOutput
 
-instance ToJSON TranscodeRequest where
-  toJSON input =
-    object
-      [ "source" .= source input,
-        "outputs" .= outputs input,
-        "config" .= config input
-      ]
-
-instance ToJSON Config where
-  toJSON input =
-    object
-      [ "success_url" .= success_url input,
-        "fail_url" .= fail_url input
-      ]
-
-instance ToJSON Output where
-  toJSON input =
-    object
-      [ "url" .= url input,
-        "width" .= width input,
-        "height" .= height input,
-        "audio_codec" .= audio_codec input,
-        "video_codec" .= video_codec input
-      ]
-
 parseTranscodeRequest :: Object -> Parser TranscodeRequest
 parseTranscodeRequest obj = do
   parsedSource <- obj .: "source"
@@ -81,3 +63,13 @@ parseConfig obj = do
   parsedSuccessUrl <- obj .: "success_url"
   parsedFailUrl <- obj .: "fail_url"
   return $ Config parsedSuccessUrl parsedFailUrl
+
+-- Response
+
+-- data TranscodeResponse = TranscodeResponse {jobId :: Int} deriving (Generic, Show)
+newtype TranscodeResponse = TranscodeResponse {jobId :: Int} deriving (Generic, Show)
+
+instance ToJSON TranscodeResponse where
+  toJSON record =
+    object
+      ["job_id" .= jobId record]

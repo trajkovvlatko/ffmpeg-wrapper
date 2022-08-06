@@ -5,16 +5,16 @@ import Servant (Proxy (Proxy))
 import Servant.API
 import Servant.Client
 import Servant.Server
-import Web.Requests.Transcode (TranscodeRequest)
-import Web.Requests.User (User (User, name))
+import Web.Endpoints.Progress.JSON (ProgressResponse)
+import Web.Endpoints.Transcode.JSON (TranscodeRequest, TranscodeResponse)
 import Web.Router
 
 -- import Network.Wai.Middleware.Cors (cors, corsMethods, corsRequestHeaders, simpleCorsResourcePolicy, simpleMethods)
 -- import Network.Wai (Middleware)
 
 type API =
-  "transcode" :> ReqBody '[JSON] TranscodeRequest :> Post '[JSON] TranscodeRequest
-    :<|> "progress" :> Get '[JSON] User
+  "transcode" :> ReqBody '[JSON] TranscodeRequest :> Post '[JSON] TranscodeResponse
+    :<|> "progress" :> Capture "job_id" Int :> Get '[JSON] ProgressResponse
 
 startWebServer :: IO ()
 startWebServer = do
