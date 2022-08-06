@@ -12,8 +12,7 @@ data TranscodeRequest = TranscodeRequest
   deriving (Generic, Show)
 
 data Config = Config
-  { video_id :: Int,
-    success_url :: String,
+  { success_url :: String,
     fail_url :: String
   }
   deriving (Generic, Show)
@@ -47,8 +46,7 @@ instance ToJSON TranscodeRequest where
 instance ToJSON Config where
   toJSON input =
     object
-      [ "video_id" .= video_id input,
-        "success_url" .= success_url input,
+      [ "success_url" .= success_url input,
         "fail_url" .= fail_url input
       ]
 
@@ -80,7 +78,6 @@ parseOutput obj = do
 
 parseConfig :: Object -> Parser Config
 parseConfig obj = do
-  parsedVideoId <- obj .: "video_id"
   parsedSuccessUrl <- obj .: "success_url"
   parsedFailUrl <- obj .: "fail_url"
-  return $ Config parsedVideoId parsedSuccessUrl parsedFailUrl
+  return $ Config parsedSuccessUrl parsedFailUrl
