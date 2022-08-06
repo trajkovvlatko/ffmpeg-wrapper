@@ -66,10 +66,11 @@ parseConfig obj = do
 
 -- Response
 
--- data TranscodeResponse = TranscodeResponse {jobId :: Int} deriving (Generic, Show)
-newtype TranscodeResponse = TranscodeResponse {jobId :: Int} deriving (Generic, Show)
+data TranscodeResponse = TranscodeResponse {jobId :: Int, progressUrl :: String} deriving (Generic, Show)
 
 instance ToJSON TranscodeResponse where
   toJSON record =
     object
-      ["job_id" .= jobId record]
+      [ "job_id" .= jobId record,
+        "progress_url" .= progressUrl record
+      ]

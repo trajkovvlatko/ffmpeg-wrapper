@@ -5,9 +5,10 @@ import Servant (Proxy (Proxy))
 import Servant.API
 import Servant.Client
 import Servant.Server
+import Web.Endpoints.Progress.Endpoint (progress)
 import Web.Endpoints.Progress.JSON (ProgressResponse)
+import Web.Endpoints.Transcode.Endpoint (transcode)
 import Web.Endpoints.Transcode.JSON (TranscodeRequest, TranscodeResponse)
-import Web.Router
 
 -- import Network.Wai.Middleware.Cors (cors, corsMethods, corsRequestHeaders, simpleCorsResourcePolicy, simpleMethods)
 -- import Network.Wai (Middleware)

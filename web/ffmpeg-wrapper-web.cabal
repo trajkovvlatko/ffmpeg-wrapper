@@ -26,9 +26,10 @@ source-repository head
 library
   exposed-modules:
       Lib
+      Web.Endpoints.Progress.Endpoint
       Web.Endpoints.Progress.JSON
+      Web.Endpoints.Transcode.Endpoint
       Web.Endpoints.Transcode.JSON
-      Web.Router
   other-modules:
       Paths_ffmpeg_wrapper_web
   hs-source-dirs:
