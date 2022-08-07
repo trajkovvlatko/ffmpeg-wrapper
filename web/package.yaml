@@ -33,6 +33,7 @@ dependencies:
 - servant-exceptions-server
 - http-types
 - text
+- uuid
 
 library:
   source-dirs: src

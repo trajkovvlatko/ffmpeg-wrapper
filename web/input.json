@@ -2,31 +2,31 @@
   "source": "/home/vlatko/apps/ffmpeg-wrapper/videos/originals/5sec.mp4",
   "outputs": [
     {
+      "type": "video",
       "url": "/home/vlatko/apps/ffmpeg-wrapper/videos/processed/720.mp4",
       "width": 1280,
       "height": 720,
       "audio_codec": "aac",
+      "audio_bitrate": "192k",
+      "audio_sample_rate": "44100",
       "video_codec": "h264",
+      "video_bitrate": "3000k",
       "single_thread": false
     },
     {
+      "type": "video",
       "url": "/home/vlatko/apps/ffmpeg-wrapper/videos/processed/640.mp4",
-      "width": 640,
-      "height": 360,
-      "audio_codec": "aac",
-      "video_codec": "h264",
-      "single_thread": false
-    },
-    {
-      "url": "/home/vlatko/apps/ffmpeg-wrapper/videos/processed/ts/ts.ts",
-      "width": 1280,
-      "height": 720,
+      "width": 320,
+      "height": 180,
       "audio_codec": "aac",
       "audio_bitrate": "192k",
+      "audio_sample_rate": "44100",
       "video_codec": "h264",
+      "video_bitrate": "3000k",
       "single_thread": false
     },
     {
+      "type": "thumbnail",
       "url": "/home/vlatko/apps/ffmpeg-wrapper/videos/processed/thumbs/0%d.jpg",
       "width": 1280,
       "height": 720,

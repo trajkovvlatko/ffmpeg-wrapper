@@ -7,7 +7,7 @@ import Web.Endpoints.Transcode.JSON (TranscodeError (..), TranscodeRequest, Tran
 
 transcode :: (MonadIO m, MonadThrow m) => TranscodeRequest -> m TranscodeResponse
 transcode input = do
-  let command = generateCommand input
+  command <- liftIO $ generateCommand input
   liftIO $ print ">>>>>>>>>>>>>>>>>"
   liftIO $ print command
   liftIO $ print "<<<<<<<<<<<<<<<<<"

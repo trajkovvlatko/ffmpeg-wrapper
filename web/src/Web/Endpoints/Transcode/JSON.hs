@@ -1,5 +1,6 @@
 module Web.Endpoints.Transcode.JSON
-  ( TranscodeRequest,
+  ( TranscodeRequest (..),
+    Output (..),
     TranscodeResponse (TranscodeResponse),
     TranscodeError (..),
     parseTranscodeRequest,
@@ -30,11 +31,16 @@ data Config = Config
   deriving (Generic, Show)
 
 data Output = Output
-  { url :: String,
+  { outputType :: String,
+    url :: String,
     width :: Int,
     height :: Int,
+    single_thread :: Bool,
     audio_codec :: Maybe String,
-    video_codec :: Maybe String
+    audio_bitrate :: Maybe String,
+    audio_sample_rate :: Maybe String,
+    video_codec :: Maybe String,
+    video_bitrate :: Maybe String
   }
   deriving (Generic, Show)
 
@@ -56,12 +62,28 @@ parseTranscodeRequest obj = do
 
 parseOutput :: Object -> Parser Output
 parseOutput obj = do
+  parsedOutputType <- obj .: "type"
   parsedUrl <- obj .: "url"
   parsedWidth <- obj .: "width"
   parsedHeight <- obj .: "height"
+  parsedSingleThread <- obj .: "single_thread"
   parsedAudioCodec <- obj .:? "audio_codec"
+  parsedAudioBitrate <- obj .:? "audio_bitrate"
+  parsedAudioSampleRate <- obj .:? "audio_sample_rate"
   parsedVideoCodec <- obj .:? "video_codec"
-  return $ Output parsedUrl parsedWidth parsedHeight parsedAudioCodec parsedVideoCodec
+  parsedVideoBitrate <- obj .:? "video_bitrate"
+  return $
+    Output
+      parsedOutputType
+      parsedUrl
+      parsedWidth
+      parsedHeight
+      parsedSingleThread
+      parsedAudioCodec
+      parsedAudioBitrate
+      parsedAudioSampleRate
+      parsedVideoCodec
+      parsedVideoBitrate
 
 parseConfig :: Object -> Parser Config
 parseConfig obj = do
