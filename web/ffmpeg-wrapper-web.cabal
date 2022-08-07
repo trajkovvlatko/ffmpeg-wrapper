@@ -25,6 +25,7 @@ source-repository head
 
 library
   exposed-modules:
+      FFmpeg
       Lib
       Web.Endpoints.Progress.Endpoint
       Web.Endpoints.Progress.JSON

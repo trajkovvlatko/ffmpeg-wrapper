@@ -1,6 +1,7 @@
 module Lib (startWebServer) where
 
 import Control.Monad.Catch (MonadCatch)
+import Control.Monad.IO.Class (MonadIO)
 import Network.Wai.Handler.Warp (run)
 import Servant
 import Servant.Exception (Throws)
@@ -24,7 +25,7 @@ type ProgressEndpoint =
 
 type API = TranscodeEndpoint :<|> ProgressEndpoint
 
-server :: MonadCatch m => ServerT API m
+server :: (MonadIO m, MonadCatch m) => ServerT API m
 server =
   transcode
     :<|> progress
