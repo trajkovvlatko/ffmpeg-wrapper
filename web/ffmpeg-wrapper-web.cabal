@@ -46,9 +46,14 @@ library
   build-depends:
       aeson
     , base >=4.7 && <5
+    , exceptions
+    , http-types
     , servant
     , servant-client
+    , servant-exceptions
+    , servant-exceptions-server
     , servant-server
+    , text
     , wai
     , wai-cors
     , warp
@@ -73,10 +78,15 @@ executable ffmpeg-wrapper-web-exe
   build-depends:
       aeson
     , base >=4.7 && <5
+    , exceptions
     , ffmpeg-wrapper-web
+    , http-types
     , servant
     , servant-client
+    , servant-exceptions
+    , servant-exceptions-server
     , servant-server
+    , text
     , wai
     , wai-cors
     , warp
@@ -102,10 +112,15 @@ test-suite ffmpeg-wrapper-web-test
   build-depends:
       aeson
     , base >=4.7 && <5
+    , exceptions
     , ffmpeg-wrapper-web
+    , http-types
     , servant
     , servant-client
+    , servant-exceptions
+    , servant-exceptions-server
     , servant-server
+    , text
     , wai
     , wai-cors
     , warp

@@ -1,8 +1,9 @@
 module Web.Endpoints.Transcode.Endpoint (transcode) where
 
-import Servant.Server (Handler)
-import Web.Endpoints.Transcode.JSON (TranscodeRequest, TranscodeResponse (TranscodeResponse))
+import Control.Monad.Catch (MonadThrow (throwM))
+import Web.Endpoints.Transcode.JSON (TranscodeError (..), TranscodeRequest, TranscodeResponse)
 
-transcode :: TranscodeRequest -> Handler TranscodeResponse
+transcode :: MonadThrow m => TranscodeRequest -> m TranscodeResponse
 transcode input = do
-  return $ TranscodeResponse 1 "http://localhost:8080/progress/1"
+  -- return $ TranscodeResponse 1 "http://localhost:8080/progress/1"
+  throwM CannotGenerateCommand

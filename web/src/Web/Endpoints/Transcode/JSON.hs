@@ -1,13 +1,18 @@
 module Web.Endpoints.Transcode.JSON
   ( TranscodeRequest,
     TranscodeResponse (TranscodeResponse),
+    TranscodeError (..),
     parseTranscodeRequest,
   )
 where
 
 import Data.Aeson (FromJSON (parseJSON), Object, ToJSON (toJSON), object, withObject, (.:), (.:?), (.=))
 import Data.Aeson.Types (Parser)
+import Data.Text.Encoding (encodeUtf8)
+import Data.Typeable (typeOf)
 import GHC.Generics (Generic)
+import Network.HTTP.Types (status500)
+import Servant.Exception (Exception, ToServantErr (headers, message, status))
 
 -- Request
 
@@ -73,4 +78,29 @@ instance ToJSON TranscodeResponse where
     object
       [ "job_id" .= jobId record,
         "progress_url" .= progressUrl record
+      ]
+
+-- Error
+
+data TranscodeError
+  = CannotGenerateCommand
+  | CannotStoreCommand
+  deriving (Show)
+
+instance Exception TranscodeError
+
+instance ToServantErr TranscodeError where
+  status CannotGenerateCommand = status500
+  status CannotStoreCommand = status500
+
+  message CannotGenerateCommand = "Cannot generate command"
+  message CannotStoreCommand = "Cannot store command"
+
+  headers e = [("X-Reason", encodeUtf8 $ message e)]
+
+instance ToJSON TranscodeError where
+  toJSON e =
+    object
+      [ "type" .= show (typeOf e),
+        "message" .= message e
       ]

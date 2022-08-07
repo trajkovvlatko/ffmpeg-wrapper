@@ -28,6 +28,11 @@ dependencies:
 - warp
 - wai
 - wai-cors
+- exceptions
+- servant-exceptions
+- servant-exceptions-server
+- http-types
+- text
 
 library:
   source-dirs: src
