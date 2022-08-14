@@ -43,7 +43,19 @@ generateVideoOutput output =
    in unwords parts
 
 generateThumbnailOutput :: Output -> String
-generateThumbnailOutput output = ""
+generateThumbnailOutput output =
+  let newWidth = show $ width output
+      newHeight = show $ height output
+      parts =
+        [ "-y",
+          if single_thread output then "-threads 1" else "",
+          "-vframes 1",
+          "-an",
+          "-s " ++ newWidth ++ "x" ++ newHeight,
+          "-ss 1",
+          url output
+        ]
+   in unwords parts
 
 generateOutput :: Output -> String
 generateOutput output =

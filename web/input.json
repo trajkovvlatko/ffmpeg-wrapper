@@ -27,10 +27,9 @@
     },
     {
       "type": "thumbnail",
-      "url": "/home/vlatko/apps/ffmpeg-wrapper/videos/processed/thumbs/0%d.jpg",
+      "url": "/home/vlatko/apps/ffmpeg-wrapper/videos/processed/thumb.jpg",
       "width": 1280,
       "height": 720,
-      "quantity": 5,
       "single_thread": false
     }
   ],

@@ -47,9 +47,8 @@ curl -i http://localhost:8080/progress/:job_id
     },
     {
       "url": "~/apps/ffmpeg-wrapper/videos/processed/thumbs/0%d.jpg",
-      "width": 1280,
-      "height": 720,
-      "quantity": 5,
+      "width": 1281,
+      "height": 721,
       "single_thread": false
     }
   ],
