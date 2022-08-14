@@ -18,6 +18,9 @@ import Web.Endpoints.Transcode.JSON
     TranscodeRequest (outputs, source),
   )
 
+listToString :: [String] -> String
+listToString = unwords . filter (not . null)
+
 generateVideoOutput :: Output -> String
 generateVideoOutput output =
   let audioCodec = fromMaybe "" (audio_codec output)
@@ -40,7 +43,7 @@ generateVideoOutput output =
           "-vf 'scale=" ++ newWidth ++ ":" ++ newHeight ++ ",pad=" ++ newWidth ++ ":" ++ newHeight ++ ":0:0'",
           url output
         ]
-   in unwords parts
+   in listToString parts
 
 generateThumbnailOutput :: Output -> String
 generateThumbnailOutput output =
@@ -55,7 +58,7 @@ generateThumbnailOutput output =
           "-ss 1",
           url output
         ]
-   in unwords parts
+   in listToString parts
 
 generateOutput :: Output -> String
 generateOutput output =
@@ -75,4 +78,4 @@ generateCommand input = do
           ++ ["2>&1"]
   print command
 
-  return $ unwords command
+  return $ listToString command
