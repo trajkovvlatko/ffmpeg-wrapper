@@ -93,7 +93,7 @@ parseConfig obj = do
 
 -- Response
 
-data TranscodeResponse = TranscodeResponse {jobId :: Int, progressUrl :: String} deriving (Generic, Show)
+data TranscodeResponse = TranscodeResponse {jobId :: String, progressUrl :: String} deriving (Generic, Show)
 
 instance ToJSON TranscodeResponse where
   toJSON record =

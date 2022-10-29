@@ -1,7 +1,6 @@
 module FFmpeg (generateCommand) where
 
 import Data.Maybe (fromMaybe)
-import Data.UUID.V4 (nextRandom)
 import Web.Endpoints.Transcode.JSON
   ( Output
       ( audio_bitrate,
@@ -66,9 +65,8 @@ generateOutput output =
     then generateVideoOutput output
     else generateThumbnailOutput output
 
-generateCommand :: TranscodeRequest -> IO String
+generateCommand :: TranscodeRequest -> String
 generateCommand input = do
-  uuid <- nextRandom
   let outputCommands = map generateOutput (outputs input)
   let command =
         [ "ffmpeg",
@@ -76,6 +74,4 @@ generateCommand input = do
         ]
           ++ outputCommands
           ++ ["2>&1"]
-  print command
-
-  return $ listToString command
+   in listToString command

@@ -27,6 +27,7 @@ library
   exposed-modules:
       FFmpeg
       Lib
+      Redis
       Web.Endpoints.Progress.Endpoint
       Web.Endpoints.Progress.JSON
       Web.Endpoints.Transcode.Endpoint
@@ -48,6 +49,7 @@ library
       aeson
     , base >=4.7 && <5
     , exceptions
+    , hedis
     , http-types
     , servant
     , servant-client
@@ -82,6 +84,7 @@ executable ffmpeg-wrapper-web-exe
     , base >=4.7 && <5
     , exceptions
     , ffmpeg-wrapper-web
+    , hedis
     , http-types
     , servant
     , servant-client
@@ -117,6 +120,7 @@ test-suite ffmpeg-wrapper-web-test
     , base >=4.7 && <5
     , exceptions
     , ffmpeg-wrapper-web
+    , hedis
     , http-types
     , servant
     , servant-client
